@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>2B:or Not 2B</title>
+    <!-- Add some CSS to change client UI -->
+    <link rel="stylesheet" href="style.css">
+    <script src="scripts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js"> </script>
+</head>
+<body>
+
+    <div class="grid-container">
+        <!-- phone# & tracked tags-->
+        <div class="grid-item grid-form"> 
+            <div class="snsForm">
+                <form>
+                    <label>Event Texts :</label>
+                    <input id="phone" type="text">
+                    <ul>
+                        <li>
+                            <button type="button" onclick="addRemoveEvent(this,document.getElementById('phone').value)">+/-</button>
+                            <p>Cars Passed</p>
+                        </li>
+                        <li>
+                            <button type="button" onclick="addRemoveEvent(this, document.getElementById('phone').value)">+/-</button>
+                            <p>Parking Capacity</p>
+                        </li>
+                        <li>
+                            <button type="button" onclick="addRemoveEvent(this, document.getElementById('phone').value)">+/-</button>
+                            <p>Stops</p>
+                        </li>
+                        <li>
+                            <button type="button" onclick="addRemoveEvent(this,document.getElementById('phone').value)">+/-</button>
+                            <div class="selector">
+                                <select id="carColors">
+                                    <option value="Red Car">Red Car</option>
+                                    <option value="Blue Car">Blue Car</option>
+                                    <option value="Black Car">Black Car</option>
+                                    <option value="White Car">White Car</option>
+                                </select> 
+                            </div>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+
+        <!--stream-->
+        <div class="grid-item"> 
+            <div class="vid">
+        
+                <!-- Add a placeholder for the Twitch embed -->
+                <div id="twitch-embed"></div>
+                
+                <!-- Load the Twitch embed script -->
+                <script src="https://player.twitch.tv/js/embed/v1.js"></script>
+        
+                <!-- Create a Twitch.Player object. This will render within the placeholder div -->
+                <script type="text/javascript">
+                new Twitch.Player("twitch-embed", {
+                    channel: "stopsigncam",
+                    width: 850,
+                    height:500,
+                    
+                });
+                </script>
+
+                <!--button onclick="takeshot()">
+                    Take Screenshot
+                </--button>
+                <--iframe id="stream" src="https://player.twitch.tv/?channel=stopsigncam&parent=localhost" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe->
+
+
+                <h1>Screenshot:</h1>
+                <div id="output"></div -->
+            </div>
+        </div>
+
+        <!--stream events-->
+        <div class="grid-item">  
+            <div class="eventList">
+                <table id="eventTable">
+                    <tr>
+                      <th>Event</th>
+                      <th>Value</th>
+                      <th>Time</th> 
+                      <th>Image</th>
+                    </tr>
+                    <tr>
+                      <td>Car Stopped</td>
+                      <td> 2s </td>
+                      <td> 27 min </td> 
+                      <td>...</td>
+                    </tr>
+                    <tr>
+                        <td>Parking Capacity</td>
+                        <td>3/12</td>
+                        <td> 1 hr </td> 
+                        <td>...</td>
+                      </tr>
+                    <tr>
+                      <td>Car Stopped</td>
+                      <td>4s</td>
+                      <td> 1 hr 37 min </td> 
+                      <td>...</td>
+                    </tr>
+                    <tr>
+                      <td>Parking Capacity</td>
+                      <td>4/12</td>
+                      <td> 2 hr </td> 
+                      <td>...</td>
+                    </tr>
+            </div>
+
+        </div>
+    </div>
+    
+    
+</body>
+</html>

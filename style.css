@@ -1,0 +1,96 @@
+body {
+    background-color: #253f76ea;
+    }
+label, button {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    margin-left: 40px;
+    }
+input {
+    color: #232F3E;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    margin-left: 20px;
+    }
+.vid {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5%;
+}
+#twitch-embed {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: purple;
+}
+.grid-container {
+display: grid;
+grid-template-columns: 30% 70%;
+/*background-color: #2195f3de;*/
+padding: 10px;
+}
+.grid-item {
+    background-color: rgba(243, 243, 243, 0.083);
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    border-radius: 11px;
+    padding: 20px;
+    font-size: 21px;
+    text-align: center;
+    margin: 10px;
+    display: block;
+}
+.grid-form {
+    grid-row: 1/3;
+}
+li {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: left;
+    width: 98%;
+    height: 10%;
+    border-radius: 10px;
+    
+    button {
+        background-color: rgba(221, 221, 221, 0.358);
+        border: 1px solid black;
+        border-radius: 5px;
+        height: 2rem;
+        align-self: center;
+        margin-right: 5%;
+    }
+    
+    .selector{
+        position: relative;
+        font-family: Arial;
+
+    }
+    .select-selected {
+        background-color: DodgerBlue;
+        }
+
+        /* Style the arrow inside the select element: */
+        .select-selected:after {
+        position: absolute;
+        content: "";
+        top: 14px;
+        right: 10px;
+        width: 0;
+        height: 0;
+        border: 6px solid transparent;
+        border-color: #fff transparent transparent transparent;
+        }
+
+        /* Point the arrow upwards when the select box is open (active): */
+        .select-selected.select-arrow-active:after {
+        border-color: transparent transparent #fff transparent;
+        top: 7px;
+        }
+}
+
+table {
+    width: 80%;
+    align-self: center;
+}
