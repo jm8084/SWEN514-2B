@@ -1,5 +1,6 @@
 var events = new Set();
 
+/** Update atble content over time */
 document.addEventListener('DOMContentLoaded', ()=>{
 
     setTimeout(()=>{
@@ -18,23 +19,15 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
 });
 
-var addRemoveEvent = (elem, phoneNumber)=>{
-    let li = elem.nextElementSibling;
-    let e = li.value==undefined ? li.innerHTML : li.value;
-    if( phoneNumber.length < 10 || isNaN(Number(phoneNumber))){
-        alert("Enter Valid Number");
-    }
-    else{
-        action = "";
-        if(events.has(e)){
-            action="Removing";
-            events.delete(e);
-        }else{
-            action="Adding"
-            events.add(e)
-        } 
-        alert(`${action} '${e}' event to ${phoneNumber}. `+ "<..API/Lambda request>");
-    }
+document.querySelectorAll('.stream').addEventListener('click', (e)=> toggleStream(e));
+const toggleStream = (elem)=>{
+    alert("Here!");
+    let active = document.querySelector('.activeStream');
+    active.removeProperty('.activeStream');
+
+    elem.style.property = '.activeStream';
+
+    
 };
 
 var takeshot = () => {
@@ -52,3 +45,31 @@ var takeshot = () => {
             .appendChild(canvas);
         })
 };
+
+// SUBSCRIBE TOPIC
+const subscribe = (email)=>{
+    const identifier = document.getElementById('identifier').value;
+    const request = document.getElementById('request').value;
+    const email = document.getElementById('email').value;
+    const lot = document.querySelector('.activeStream');
+
+    // instantiate a headers object
+    var myHeaders = new Headers();
+    // add content type header to object
+    myHeaders.append("Content-Type", "application/json");
+    // using built in JSON utility package turn object to string and store in a variable
+    var raw = JSON.stringify({"email":email});
+    // create a JSON object with parameters for API call and store in a variable
+    var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+    };
+    // make API call with parameters and use promises to get response
+    fetch("https://mybeeog2j7.execute-api.us-east-1.amazonaws.com/dev/subscribe", requestOptions)
+    .then(response => response.text())
+    .then(result => alert(JSON.parse(result).body))
+    .catch(error => console.log('error', error));
+}
+

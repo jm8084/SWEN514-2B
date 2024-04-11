@@ -7,41 +7,52 @@
     <link rel="stylesheet" href="style.css">
     <script src="scripts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js"> </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
-<body>
+<body class="myBody">
 
     <div class="grid-container">
         <!-- phone# & tracked tags-->
         <div class="grid-item grid-form"> 
             <div class="snsForm">
                 <form>
-                    <label>Event Texts :</label>
-                    <input id="phone" type="text">
-                    <ul>
-                        <li>
-                            <button type="button" onclick="addRemoveEvent(this,document.getElementById('phone').value)">+/-</button>
-                            <p>Cars Passed</p>
-                        </li>
-                        <li>
-                            <button type="button" onclick="addRemoveEvent(this, document.getElementById('phone').value)">+/-</button>
-                            <p>Parking Capacity</p>
-                        </li>
-                        <li>
-                            <button type="button" onclick="addRemoveEvent(this, document.getElementById('phone').value)">+/-</button>
-                            <p>Stops</p>
-                        </li>
-                        <li>
-                            <button type="button" onclick="addRemoveEvent(this,document.getElementById('phone').value)">+/-</button>
-                            <div class="selector">
-                                <select id="carColors">
-                                    <option value="Red Car">Red Car</option>
-                                    <option value="Blue Car">Blue Car</option>
-                                    <option value="Black Car">Black Car</option>
-                                    <option value="White Car">White Car</option>
-                                </select> 
-                            </div>
-                        </li>
-                    </ul>
+                    <div class="emailInput">
+                        <label>Email </label>
+                        <input id="email" type="text">
+                    </div>
+                    <hr>
+
+                    <div>
+                        <div id="stream-1" class="stream activeStream" onclick="toggleStream(this)">
+                            <h3> 1 </h3>
+                            <p>Twitch Stopsign</p>
+                        </div>
+                        <div id="stream-2" class="stream" onclick="toggleStream(this)">
+                            <h3> 2 </h3>
+                            <p>Some Parking Lot</p>
+                        </div>
+                        <div id="stream-3" class="stream">
+                            <h3> 3 </h3>
+                            <p>Another Lot</p>
+                        </div>
+                    </div>
+                    <hr>
+
+                    <label for="topics">Choose a Notification Group :</label>
+                    <div class="topicRequest">
+                        <div class="select">
+                            <select name="topics" id="identifier" class="form-select" >
+                                <option value="1">Free Spots &gt;</option>
+                                <option value="2">Free Spots &lt;</option>
+                                <option value="3">Spot Taken</option>
+                                <option value="4">Spot Free</option>
+                            </select>
+                        </div>
+                        <input id="request" type="number"> 
+                    </div>
+                    <hr>
+                    <button id="subscribe" type="button" onclick="subscribe()">Subscribe</button>
                 </form>
             </div>
         </div>
