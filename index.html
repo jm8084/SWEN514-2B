@@ -24,7 +24,7 @@
                     <hr>
 
                     <div>
-                        <div id="stream-1" class="stream activeStream" onclick="toggleStream(this)">
+                        <div id="stream-1" class="stream activeStream" onclick="toggleStream()">
                             <h3> 1 </h3>
                             <p>Twitch Stopsign</p>
                         </div>
@@ -52,13 +52,14 @@
                         <input id="request" type="number"> 
                     </div>
                     <hr>
-                    <button id="subscribe" type="button" onclick="subscribe()">Subscribe</button>
+                    <button id="sub" type="submit" onclick="subscribe()">Subscribe</button>
                 </form>
             </div>
         </div>
 
         <!--stream-->
         <div class="grid-item"> 
+            
             <div class="vid">
         
                 <!-- Add a placeholder for the Twitch embed -->
@@ -77,14 +78,7 @@
                 });
                 </script>
 
-                <!--button onclick="takeshot()">
-                    Take Screenshot
-                </--button>
-                <--iframe id="stream" src="https://player.twitch.tv/?channel=stopsigncam&parent=localhost" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe->
-
-
-                <h1>Screenshot:</h1>
-                <div id="output"></div -->
+                
             </div>
         </div>
 
@@ -93,34 +87,18 @@
             <div class="eventList">
                 <table id="eventTable">
                     <tr>
-                      <th>Event</th>
-                      <th>Value</th>
-                      <th>Time</th> 
-                      <th>Image</th>
+                      <th>Lot</th>
+                      <th>Spots Free</th>
+                      <th>Spots Taken</th> 
+                      <th>Occupied Spots</th>
+                      <th>Time</th>
                     </tr>
                     <tr>
-                      <td>Car Stopped</td>
-                      <td> 2s </td>
-                      <td> 27 min </td> 
-                      <td>...</td>
-                    </tr>
-                    <tr>
-                        <td>Parking Capacity</td>
-                        <td>3/12</td>
-                        <td> 1 hr </td> 
-                        <td>...</td>
-                      </tr>
-                    <tr>
-                      <td>Car Stopped</td>
-                      <td>4s</td>
-                      <td> 1 hr 37 min </td> 
-                      <td>...</td>
-                    </tr>
-                    <tr>
-                      <td>Parking Capacity</td>
-                      <td>4/12</td>
-                      <td> 2 hr </td> 
-                      <td>...</td>
+                      <td>-</td>
+                      <td>-</td> 
+                      <td>-</td>
+                      <td>-</td> 
+                      <td>-</td>
                     </tr>
             </div>
 

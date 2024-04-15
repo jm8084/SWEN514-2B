@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>404</title>
+    <!-- Add some CSS to change client UI -->
+    <link rel="stylesheet" href="404.css">
+</head>
+<body class="myBody">
+  <div></div>
+  <svg>
+    <defs>
+      <filter id=glow>
+        <fegaussianblur class=blur result=coloredBlur stddeviation=4></fegaussianblur>
+        <femerge>
+          <femergenode in=coloredBlur></femergenode>
+          <femergenode in=SourceGraphic></femergenode>
+        </femerge>
+      </filter>
+    </defs>
+  </svg>
+  <h2>Page Not Found</h2>
+</body>
