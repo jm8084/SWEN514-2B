@@ -61,7 +61,7 @@
         <!--stream-->
         <div class="grid-item"> 
             
-            <div class="vid">
+            <div id="vid1" class="vid active">
                 <!-- Add a placeholder for the Twitch embed -->
                 <div id="twitch-embed"></div>
 
@@ -77,17 +77,22 @@
 
                 
             </div>
-            <div class="vid hidden">
-                ...
+            <div id="vid2" class="vid" style="display: none;">
+                
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/RuiHEi2ImpI?si=v4B6TMz_0NpZLb7b" title="YouTube video player" 
+                    frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                </iframe>
             </div>
-            <div class="vid hidden">
-                ...
+            <div id="vid3" class="vid" style="display: none;">
+                
             </div>
         </div>
 
         <!--stream events-->
         <div class="grid-item">  
             <div class="eventList">
+                <button onclick="getParkinglots()">Refresh</button>
                 <table id="eventTable">
                     <tr>
                       <th>Lot</th>

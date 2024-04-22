@@ -1,7 +1,7 @@
 
 
 
-//const API_URL = "https://r7ovyximrl.execute-api.us-east-1.amazonaws.com/dev";
+const API_URL = "https://1pj43m8rw9.execute-api.us-east-1.amazonaws.com/dev";
 
 //^^ Leave space above for terraoform to inject api url into file as: API_URL = '...'; 
 // create an API_URL variabl for local testing (copy invoke url from api gateway deployment)
@@ -10,14 +10,10 @@
 
 // load table data ocne loaded/
 document.addEventListener('DOMContentLoaded', ()=>{
-
-    document.addEventListener
-    //getParkinglots();
     updateTable(data);
-    
 
     $.get(
-        "https://fi5l3eo2c8.execute-api.us-east-1.amazonaws.com/dev/",
+        API_URL,
         { },
         function(data) {
            alert('page content: ' + data);
@@ -43,7 +39,7 @@ document.querySelectorAll('.stream').forEach(element => {
     element.addEventListener("click", toggleStream(element));
     console.log('here');
 });
-const activeLot = 1;
+var activeLot = 1;
 
 const toggleStream = (elem) =>{
     if(elem.className != "activeStream"){
@@ -58,6 +54,9 @@ const toggleStream = (elem) =>{
 };
 
 const setActiveLot = (lot) =>{
+    document.getElementById(`vid${activeLot}`).style.display = "none";
+    document.getElementById(`vid${lot}`).style.display = "flex";
+
     if(lot == 1){
 
     }else if(lot == 2){
@@ -82,18 +81,14 @@ const updateTable = (data) => {
 }
 
 function subsc(){
-    let socket = new WebSocket("wss://r7ovyximrl.execute-api.us-east-1.amazonaws.com/dev/subscribe");
+    let socket = new WebSocket(`wss://${API_URL}`);
 
     socket.onopen = function(e) {
     alert("[open] Connection established");
     alert("Sending to server");
-    let req = {
-        "identifier":identifier,
-        "request":request,
-        "lot":lot,
-        "email":email}
 
-    socket.send(req);
+
+    socket.send();
     };
 
     socket.onmessage = function(event) {
@@ -124,16 +119,10 @@ function subscribe(form){
     const lot = document.querySelector('.activeStream');
     console.log("HERE!");
     console.log(form);
-    var raw = JSON.stringify({
-        "identifier":identifier,
-        "request":request,
-        "lot":lot,
-        "email":email});
 
     // instantiate a headers object
     var myHeaders = new Headers();
     // add content type header to object
-    myheaders.append('Authorization', "none");
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append('Access-Control-Allow-Origin', '*');
     // using built in JSON utility package turn object to string and store in a variable
@@ -151,7 +140,7 @@ function subscribe(form){
         redirect: 'follow'
     };
     // make API call with parameters and use promises to get response
-    fetch(`${API_URL}/subscribe?identifier=${identifier}&request=${request}&lot=${lot}&email=${email}`)
+    fetch(`${API_URL}/parkinglots?identifier=${identifier}&request=${request}&lot=${lot}&email=${email}`)
     .then(response => {
         alert.log(response.text());
         return response.json;
@@ -165,10 +154,14 @@ function getParkinglots(){
     
     var myHeaders = new Headers();
     // add content type header to object
-    //myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append('Access-Control-Allow-Methods', 'GET, OPTION')
+    myHeaders.append('Access-Control-Allow-Origin', '*');
+    var raw = JSON.stringify({});
     var requestOptions = {
         method: 'GET',
-        header: myHeaders
+        header: myHeaders,
+        redirect: 'follow'
     };
     // make API call with parameters and use promises to get response
     fetch(`${API_URL}/parkinglots`, requestOptions)
@@ -176,9 +169,8 @@ function getParkinglots(){
         console.log(response.json());
         return response.json()
     }).then(result => {
-        console.log(result["result"]['message']);//updateTable(JSON.parse(result).body)
+        console.log(result["result"]['message']);//
+        updateTable(JSON.parse(result).body)
     })
-    .catch(error => console.log('error', JSON.parse(error)));
+    .catch(error => console.log('error', error));
 }
-
-require('Node:http');
