@@ -1,7 +1,6 @@
 
 
 
-const API_URL = "https://1pj43m8rw9.execute-api.us-east-1.amazonaws.com/dev";
 
 //^^ Leave space above for terraoform to inject api url into file as: API_URL = '...'; 
 // create an API_URL variabl for local testing (copy invoke url from api gateway deployment)
@@ -12,13 +11,6 @@ const API_URL = "https://1pj43m8rw9.execute-api.us-east-1.amazonaws.com/dev";
 document.addEventListener('DOMContentLoaded', ()=>{
     updateTable(data);
 
-    $.get(
-        API_URL,
-        { },
-        function(data) {
-           alert('page content: ' + data);
-        }
-    );
 });
 
 data = [{
@@ -80,37 +72,6 @@ const updateTable = (data) => {
     });
 }
 
-function subsc(){
-    let socket = new WebSocket(`wss://${API_URL}`);
-
-    socket.onopen = function(e) {
-    alert("[open] Connection established");
-    alert("Sending to server");
-
-
-    socket.send();
-    };
-
-    socket.onmessage = function(event) {
-    alert(`[message] Data received from server: ${event.data}`);
-    };
-
-    socket.onclose = function(event) {
-    if (event.wasClean) {
-        alert(`[close] Connection closed cleanly, code=${event.code} reason=${event.reason}`);
-    } else {
-        // e.g. server process killed or network down
-        // event.code is usually 1006 in this case
-        alert('[close] Connection died');
-    }
-    };
-
-    socket.onerror = function(error) {
-    alert(`[error]`);
-    };
-}
-
-
 //API- SUBSCRIBE TOPIC
 function subscribe(form){
     const identifier = document.getElementById('identifier').value;
@@ -140,7 +101,7 @@ function subscribe(form){
         redirect: 'follow'
     };
     // make API call with parameters and use promises to get response
-    fetch(`${API_URL}/parkinglots?identifier=${identifier}&request=${request}&lot=${lot}&email=${email}`)
+    fetch(`${API_URL}/dev/parkinglots?identifier=${identifier}&request=${request}&lot=${lot}&email=${email}`)
     .then(response => {
         alert.log(response.text());
         return response.json;
@@ -164,7 +125,7 @@ function getParkinglots(){
         redirect: 'follow'
     };
     // make API call with parameters and use promises to get response
-    fetch(`${API_URL}/parkinglots`, requestOptions)
+    fetch(`${API_URL}/dev/parkinglots`, requestOptions)
     .then(response => {
         console.log(response.json());
         return response.json()
