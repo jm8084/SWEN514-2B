@@ -1,6 +1,7 @@
 
 
 
+//const API_URL = "https://wdsch0hk7f.execute-api.us-east-1.amazonaws.com/dev";
 
 //^^ Leave space above for terraoform to inject api url into file as: API_URL = '...'; 
 // create an API_URL variabl for local testing (copy invoke url from api gateway deployment)
@@ -10,7 +11,6 @@
 // load table data ocne loaded/
 document.addEventListener('DOMContentLoaded', ()=>{
     updateTable(data);
-
 });
 
 data = [{
@@ -73,41 +73,24 @@ const updateTable = (data) => {
 }
 
 //API- SUBSCRIBE TOPIC
-function subscribe(form){
-    const identifier = document.getElementById('identifier').value;
-    const request = document.getElementById('request').value;
+const subscribe = async () =>{
+    const identifier = Number(document.getElementById('identifier').value);
+    const request = Number(document.getElementById('request').value);
     const email = document.getElementById('email').value;
-    const lot = document.querySelector('.activeStream');
-    console.log("HERE!");
-    console.log(form);
+    const lot = activeLot;
+    event.preventDefault();
 
-    // instantiate a headers object
-    var myHeaders = new Headers();
-    // add content type header to object
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.append('Access-Control-Allow-Origin', '*');
-    // using built in JSON utility package turn object to string and store in a variable
-    var raw = JSON.stringify({
-        "identifier":identifier,
-        "request":request,
-        "lot":lot,
-        "email":email});
-    console.log(raw);
-    // create a JSON object with parameters for API call and store in a variable
-    var requestOptions = {
+    const response = await fetch(`${API_URL}/parkinglots?identifier=${identifier}&request=${request}&lot=${lot}&email=${email}`, {
         method: 'POST',
-        headers: myHeaders,
-        body: raw,
-        redirect: 'follow'
-    };
-    // make API call with parameters and use promises to get response
-    fetch(`${API_URL}/dev/parkinglots?identifier=${identifier}&request=${request}&lot=${lot}&email=${email}`)
-    .then(response => {
-        alert.log(response.text());
-        return response.json;
-    })
-    .then(result => alert(result))
-    .catch(error => console.log('error', error));
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        }
+    });
+
+    const data = await response.json()
+
+    console.log(data);
+    return data;
 }
 
 //API- GET PARKINGLOTS
@@ -116,7 +99,6 @@ function getParkinglots(){
     var myHeaders = new Headers();
     // add content type header to object
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append('Access-Control-Allow-Methods', 'GET, OPTION')
     myHeaders.append('Access-Control-Allow-Origin', '*');
     var raw = JSON.stringify({});
     var requestOptions = {
@@ -125,12 +107,11 @@ function getParkinglots(){
         redirect: 'follow'
     };
     // make API call with parameters and use promises to get response
-    fetch(`${API_URL}/dev/parkinglots`, requestOptions)
+    fetch(`${API_URL}/parkinglots`, requestOptions)
     .then(response => {
         console.log(response.json());
         return response.json()
     }).then(result => {
-        console.log(result["result"]['message']);//
         updateTable(JSON.parse(result).body)
     })
     .catch(error => console.log('error', error));
